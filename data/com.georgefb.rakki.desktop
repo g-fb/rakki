@@ -1,0 +1,15 @@
+#
+# SPDX-FileCopyrightText: 2024 George Florea Bănuș <georgefb899@gmail.com>
+#
+# SPDX-License-Identifier: CC0-1.0
+#
+
+[Desktop Entry]
+Name=rakki
+Exec=rakki %u
+Icon=rakki
+Type=Application
+Categories=Qt;KDE;Graphics;Viewer;
+MimeType=inode/directory;application/zip;application/vnd.comicbook+zip;application/vnd.rar;application/vnd.comicbook-rar;application/x-tar;application/x-cbt;application/x-7z-compressed;application/x-cb7;
+Terminal=false
+StartupWMClass=rakki

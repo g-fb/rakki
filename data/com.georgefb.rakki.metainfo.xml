@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ SPDX-FileCopyrightText: 2024 George Florea Bănuș <georgefb899@gmail.com>
+
+ SPDX-License-Identifier: CC0-1.0
+ -->
+<component type="desktop-application">
+    <name>rakki</name>
+    <id>com.georgefb.rakki</id>
+    <launchable type="desktop-id">com.georgefb.rakki.desktop</launchable>
+    <metadata_license>CC-BY-4.0</metadata_license>
+    <project_license>GPL-3.0-or-later</project_license>
+    <url type="homepage">https://github.com/g-fb/rakki</url>
+    <url type="bugtracker">https://github.com/g-fb/rakki/issues</url>
+    <url type="donation">https://github.com/sponsors/g-fb</url>
+    <summary>Open source manga browser and reader.</summary>
+    <developer_name>George Florea Bănuș</developer_name>
+    <description>
+        <p>The simplest vertical manga reader. Supports folders and cbz, cbr, cbt, cb7, zip, rar, tar, 7z file formats..</p>
+        <p>Settings</p>
+        <ul>
+            <li>Maximum image width</li>
+            <li>Image spacing</li>
+            <li>Upscale images to fit maximum width</li>
+            <li>Hide scrollbar</li>
+        </ul>
+    </description>
+    <content_rating type="oars-1.0" />
+</component>

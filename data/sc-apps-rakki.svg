@@ -1,0 +1,22 @@
+<svg width="128.00002" height="127.99999" version="1.1" viewBox="0 0 33.866671 33.866665" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="linearGradient3368" x1="1.2627364" x2="66.085648" y1="263.26562" y2="263.26562" gradientTransform="matrix(.41632644 0 0 .4152341 -169.59447 -60.104355)" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#9c58da" offset="0"/>
+            <stop stop-color="#4c56cd" offset="1"/>
+        </linearGradient>
+    </defs>
+    <g transform="translate(-32.279167,-138.64166)">
+        <circle cx="49.212509" cy="155.575" r="15.743801" display="none" enable-background="new" fill="none" opacity=".2" stroke="currentColor" stroke-width=".261937" style="paint-order:normal"/>
+        <rect x="35.585205" y="141.94769" width="27.254602" height="27.254602" rx="2.096508" ry="2.096508" display="none" enable-background="new" fill="none" opacity=".2" stroke="currentColor" stroke-width=".261937" style="paint-order:normal"/>
+        <rect transform="rotate(-90)" x="-169.06874" y="35.754162" width="26.987492" height="26.916681" ry="2.7465978" fill="url(#linearGradient3368)" stroke-width=".131474"/>
+        <rect x="87.282417" y="139.0047" width=".082962379" height=".40914065" ry=".041481189" fill="#cd4b84"/>
+        <g fill="#e1e1e1" stroke="#4b4b4b">
+            <rect x="41.216709" y="145.41292" width="15.991585" height="20.324139" stroke-width=".768447"/>
+            <g stroke-width=".614799">
+                <rect x="41.407291" y="154.8474" width="15.808854" height=".23151042"/>
+                <rect transform="rotate(8.1655823)" x="69.746223" y="146.53334" width=".16536459" height="10.31875"/>
+                <rect x="50.356613" y="145.6107" width=".16370259" height="9.354434"/>
+            </g>
+        </g>
+    </g>
+</svg>
