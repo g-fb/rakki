@@ -35,7 +35,6 @@ target_link_libraries(rakki
     PRIVATE
         Qt6::Core
         Qt6::QuickControls2
-        Qt6::Widgets
 
         KF6::Archive
 )

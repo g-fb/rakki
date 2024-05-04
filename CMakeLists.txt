@@ -12,7 +12,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(ECM 5.100 REQUIRED NO_MODULE)
+find_package(ECM 6.1 REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 include(FeatureSummary)
@@ -40,9 +40,6 @@ set_package_properties(Qt6Core PROPERTIES TYPE REQUIRED)
 
 find_package(Qt6QuickControls2)
 set_package_properties(Qt6QuickControls2 PROPERTIES TYPE REQUIRED)
-
-find_package(Qt6Widgets)
-set_package_properties(Qt6Widgets PROPERTIES TYPE REQUIRED)
 
 find_package(KF6Archive)
 set_package_properties(KF6Archive PROPERTIES
