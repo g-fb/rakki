@@ -235,7 +235,7 @@ Window {
     FolderDialog {
         id: folderDialog
 
-        currentFolder: StandardPaths.standardLocations(StandardPaths.HomeLocation)
+        currentFolder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
         onSelectedFolderChanged: {
             window.file = selectedFolder
         }
