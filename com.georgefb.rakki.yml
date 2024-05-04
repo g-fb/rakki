@@ -1,0 +1,129 @@
+---
+app-id: com.georgefb.rakki
+runtime: org.freedesktop.Platform
+runtime-version: 22.08
+sdk: org.freedesktop.Sdk
+command: rakki
+rename-icon: rakki
+copy-icon: true
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --filesystem=host
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/man
+
+modules:
+  - name: rakki
+    buildsystem: cmake-ninja
+    sources:
+      - type: dir
+        path: '/home/george/Computer/NVME1/Development/c++/rakki'
+    modules:
+      - name: qt6-qtbase
+        cleanup-platform:
+          - /bin
+        buildsystem: cmake-ninja
+        config-opts:
+          - '-DQT_DISABLE_RPATH=ON'
+          - '-DBUILD_WITH_PCH=FALSE'
+          - '-DQT_FEATURE_openssl_linked=ON'
+          - '-DQT_FEATURE_system_sqlite=ON'
+          - '-DFEATURE_elf_private_full_version=TRUE'
+          - '-DFEATURE_enable_new_dtags=TRUE'
+          - '-DFEATURE_journald=TRUE'
+          - '-DFEATURE_libproxy=TRUE'
+          - '-DFEATURE_reduce_relocations=FALSE'
+          - '-DFEATURE_relocatable=FALSE'
+          - '-DFEATURE_xcb_native_painting=TRUE'
+          - '-DINPUT_openssl=linked'
+          - '-DFEATURE_forkfd_pidfd=FALSE'
+          - '-DCMAKE_BUILD_TYPE:STRING=RelWithDebInfo'
+        sources:
+          - type: archive
+            url: https://download.qt.io/official_releases/qt/6.7/6.7.0/submodules/qtbase-everywhere-src-6.7.0.tar.xz
+            sha256: 11b2e29e2e52fb0e3b453ea13bbe51a10fdff36e1c192d8868c5a40233b8b254
+          - type: patch
+            paths:
+              - patch/qtbase-find_package-paths.patch
+              - patch/552508-Use-ifdef-instead-of-if-for-cpp_lib_span.patch
+
+      - name: qt6-qttools
+        buildsystem: cmake-ninja
+        cleanup-platform:
+          - /bin/assistant
+          - /bin/qhelpgenerator
+          - /bin/qcollectiongenerator
+          - /bin/qhelpconverter
+          - /bin/pixeltool
+          - /bin/designer
+          - /bin/lrelease
+          - /bin/lupdate
+          - /bin/lconvert
+          - /bin/linguist
+          - /bin/qdoc
+          - /bin/qtattributionsscanner
+          - /bin/qtplugininfo
+          - /bin/qtdiag
+          - /bin/qdbusviewer
+        sources:
+          - type: archive
+            url: https://download.qt.io/official_releases/qt/6.7/6.7.0/submodules/qttools-everywhere-src-6.7.0.tar.xz
+            sha256: c8da6b239e82fe1e23465cbf0936c0da5a334438d3fb433e19c503cbb1abee7b
+
+      - name: qt6-wayland
+        buildsystem: cmake-ninja
+        sources:
+          - type: archive
+            url: https://download.qt.io/official_releases/qt/6.7/6.7.0/submodules/qtwayland-everywhere-src-6.7.0.tar.xz
+            sha256: d73470e4217da388d8cd2a517ee8bb373853f33c569306e80f04397845157aea
+
+      - name: qt6-shadertools
+        buildsystem: cmake-ninja
+        sources:
+          - type: archive
+            url: https://download.qt.io/official_releases/qt/6.7/6.7.0/submodules/qtshadertools-everywhere-src-6.7.0.tar.xz
+            sha256: 3e13f967c62f0815c901e754cbc472a2e19170da0c7a505230d559615f7998af
+
+      - name: qt6-qtdeclarative
+        buildsystem: cmake-ninja
+        sources:
+          - type: archive
+            url: https://download.qt.io/official_releases/qt/6.7/6.7.0/submodules/qtdeclarative-everywhere-src-6.7.0.tar.xz
+            sha256: 5a0c39579a74d7cca581162c866ed0887287d4f8d5abff7ab9492d4a58fa9e2c
+
+      - name: extra-cmake-modules
+        buildsystem: cmake-ninja
+        config-opts:
+          "-DBUILD_TESTING=OFF"
+        sources:
+          - type: git
+            url: https://invent.kde.org/frameworks/extra-cmake-modules.git
+            tag: v6.1.0
+            commit: 7e68938f075a0423e3744358be9c4e77c6922104
+
+      - name: karchive
+        buildsystem: cmake-ninja
+        config-opts:
+          "-DBUILD_TESTING=OFF"
+        sources:
+          - type: git
+            url: https://invent.kde.org/frameworks/karchive.git
+            tag: v6.1.0
+            commit: 0594c800e83b3647e11a0c0e466d00a38fb62cb4
+
+  - name: unrar
+    no-autogen: true
+    make-install-args:
+      - DESTDIR=/app
+    sources:
+      - type: archive
+        url: https://www.rarlab.com/rar/unrarsrc-7.0.8.tar.gz
+        sha256: f68b6a0bb16cbc7e157652542966ee64ca66ae3958273a64128484c51f1b768d
