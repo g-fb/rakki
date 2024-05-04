@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include <QApplication>
 #include <QCommandLineParser>
+#include <QGuiApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -19,15 +19,12 @@ int main(int argc, char *argv[])
     auto startTime = QDateTime::currentMSecsSinceEpoch();
     qSetMessagePattern(QStringLiteral("%{time [hh:mm:ss.zzz]}: %{message}"));
 
-    QApplication::setDesktopFileName(QStringLiteral("com.georgefb.rakki"));
+    QGuiApplication::setDesktopFileName(QStringLiteral("com.georgefb.rakki"));
 
-    QQuickStyle::setStyle(QStringLiteral("org.kde.desktop"));
-    QQuickStyle::setFallbackStyle(QStringLiteral("Fusion"));
-
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
     app.setOrganizationName(QStringLiteral("georgefb"));
-    app.setApplicationName(QStringLiteral("mangareader"));
-    QApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("rakki")));
+    app.setApplicationName(QStringLiteral("rakki"));
+    QGuiApplication::setWindowIcon(QIcon::fromTheme(QStringLiteral("rakki")));
 
     QCommandLineParser clParser;
     clParser.process(app);
