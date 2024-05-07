@@ -44,9 +44,12 @@ void MangaLoader::setupImages(const QStringList &images, KArchive *archive)
     m_archive = archive;
 
     std::unique_ptr<QIODevice> dev;
+    QFileInfo fi;
     QImageReader imageReader;
     imageReader.setAutoTransform(true);
     for (int i = 0; i < images.count(); ++i) {
+        fi.setFile(images.at(i));
+        imageReader.setFormat(fi.suffix().toUtf8());
         if (archive != nullptr) {
             const KArchiveFile *entry = archive->directory()->file(images.at(i));
             if (!entry) {
@@ -66,12 +69,9 @@ void MangaLoader::setupImages(const QStringList &images, KArchive *archive)
         }
 
         imageReader.setDevice(dev.get());
-        QElapsedTimer timer;
-        timer.start();
         if (!imageReader.canRead()) {
             continue;
         }
-        qDebug() << images.at(i) << "ms elapsed:" << timer.elapsed() << "ns elapsed:" << timer.nsecsElapsed();
 
         QSize pageSize = imageReader.size();
         if (imageReader.transformation() & QImageIOHandler::TransformationRotate90) {
