@@ -1,0 +1,37 @@
+---
+app-id: com.georgefb.rakki
+runtime: org.kde.Platform
+runtime-version: 6.7
+sdk: org.kde.Sdk
+command: rakki
+rename-icon: rakki
+copy-icon: true
+finish-args:
+  - --share=ipc
+  - --socket=wayland
+  - --socket=fallback-x11
+  - --device=dri
+  - --filesystem=host
+cleanup:
+  - '*.a'
+  - '*.la'
+  - /include
+  - /lib/cmake
+  - /lib/pkgconfig
+  - /share/man
+
+modules:
+  - name: rakki
+    buildsystem: cmake-ninja
+    sources:
+      - type: dir
+        path: '..'
+
+  - name: unrar
+    no-autogen: true
+    make-install-args:
+      - DESTDIR=/app
+    sources:
+      - type: archive
+        url: https://www.rarlab.com/rar/unrarsrc-7.0.8.tar.gz
+        sha256: f68b6a0bb16cbc7e157652542966ee64ca66ae3958273a64128484c51f1b768d
