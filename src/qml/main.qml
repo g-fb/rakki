@@ -171,8 +171,8 @@ Window {
                         source: "image://manga/" + model.path
                         width: view.scaledWidth(Qt.size(originalWidth, originalHeight))
                         height: view.scaledHeight(Qt.size(originalWidth, originalHeight))
-                        sourceSize.width: window.maximumImageWidth
-                        sourceSize.height: window.maximumImageWidth
+                        sourceSize.width: width
+                        sourceSize.height: height
                         asynchronous: true
                         cache: false
                     }
