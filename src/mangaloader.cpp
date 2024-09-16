@@ -49,9 +49,10 @@ void MangaLoader::setupImages(const QStringList &images, KArchive *archive)
     imageReader.setAutoTransform(true);
     for (int i = 0; i < images.count(); ++i) {
         fi.setFile(images.at(i));
-        imageReader.setFormat(fi.suffix().toUtf8());
         if (archive != nullptr) {
             const KArchiveFile *entry = archive->directory()->file(images.at(i));
+
+            imageReader.setFormat(fi.suffix().toUtf8());
             if (!entry) {
                 continue;
             }
@@ -102,7 +103,7 @@ void MangaLoader::handlePath(const QString &path)
         QStringList images = dirImages(fileInfo.absoluteFilePath(), true);
         setupImages(images);
     } else {
-        m_extractor->setArchiveFile(fileInfo.absoluteFilePath());
+        m_extractor->open(fileInfo.absoluteFilePath());
         m_extractor->extractArchive();
     }
 }

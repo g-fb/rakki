@@ -25,8 +25,8 @@ Window {
 
     title: file
     visible: true
-    width: 1500
-    height: 1000
+    width: 700
+    height: 900
 
     onVisibilityChanged: (visibility) => {
         if (!window.isFullScreen()) {
@@ -133,11 +133,18 @@ Window {
         asynchronous: true
         anchors.fill: parent
         sourceComponent: ScrollView {
+            id: scrollView
+
+            property int scrollStepSize: 150
+
             ScrollBar.vertical: ScrollBar {
+                id: scrollbar
+
                 visible: window.showScrollBar
                 anchors.top: view.top
                 anchors.bottom: view.bottom
                 anchors.left: view.right
+                stepSize: scrollView.scrollStepSize / scrollView.contentHeight
             }
             ListView {
                 id: view
@@ -178,10 +185,20 @@ Window {
                     }
                 }
 
-                TapHandler {
-                    acceptedButtons: Qt.LeftButton
-                    onDoubleTapped: function(eventPoint, button) {
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+
+                    onDoubleClicked: function(eventPoint, button) {
                         toggleFullScreen()
+                    }
+
+                    onWheel: function(wheel) {
+                        if (wheel.angleDelta.y > 0) {
+                            scrollbar.decrease()
+                        } else {
+                            scrollbar.increase()
+                        }
                     }
                 }
 
