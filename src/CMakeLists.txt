@@ -37,6 +37,7 @@ target_link_libraries(rakki
         Qt6::QuickControls2
 
         KF6::Archive
+        KF6::Kirigami
 )
 
 install(TARGETS rakki DESTINATION ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})

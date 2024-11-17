@@ -10,6 +10,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
 
+import org.kde.kirigami as Kirigami
+
 import com.georgefb.rakki
 
 Window {
@@ -19,6 +21,7 @@ Window {
     property int preFullScreenVisibility
     property int maximumImageWidth: 2000
     property int imageSpacing: 25
+    property int scrollStepSize: 150
     property bool upscaleImages: true
     property bool showScrollBar: true
 
@@ -39,6 +42,7 @@ Window {
         property alias maximumImageWidth: window.maximumImageWidth
         property alias imageSpacing: window.imageSpacing
         property alias upscaleImages: window.upscaleImages
+        property alias scrollStepSize: window.scrollStepSize
         property alias showScrollBar: window.showScrollBar
     }
 
@@ -122,6 +126,19 @@ Window {
                         onCheckedChanged: settings.showScrollBar = checked
                     }
                 }
+
+                RowLayout {
+                    Label {
+                        text: "Scroll step size"
+                    }
+                    SpinBox {
+                        from: 10
+                        to: 1000
+                        stepSize: 20
+                        value: settings.scrollStepSize
+                        onValueChanged: settings.scrollStepSize = value
+                    }
+                }
             }
         }
     }
@@ -132,25 +149,11 @@ Window {
         active: window.visible
         asynchronous: true
         anchors.fill: parent
-        sourceComponent: ScrollView {
-            id: scrollView
-
-            property int scrollStepSize: 150
-
-            ScrollBar.vertical: ScrollBar {
-                id: scrollbar
-
-                visible: window.showScrollBar
-                anchors.top: view.top
-                anchors.bottom: view.bottom
-                anchors.left: view.right
-                stepSize: scrollView.scrollStepSize / scrollView.contentHeight
-            }
-            ListView {
+        sourceComponent: ListView {
                 id: view
 
                 anchors.fill: parent
-                anchors.rightMargin: window.showScrollBar ? parent.ScrollBar.vertical.width : 0
+                anchors.rightMargin: window.showScrollBar ? ScrollBar.vertical.width : 0
                 model: MangaImagesModel {
                     id: mangaImagesModel
 
@@ -185,21 +188,22 @@ Window {
                     }
                 }
 
-                MouseArea {
-                    anchors.fill: parent
-                    hoverEnabled: true
+                ScrollBar.vertical: ScrollBar {
+                    visible: window.showScrollBar
+                    anchors.top: view.top
+                    anchors.bottom: view.bottom
+                    anchors.left: view.right
+                }
 
-                    onDoubleClicked: function(eventPoint, button) {
-                        toggleFullScreen()
-                    }
+                Kirigami.WheelHandler {
+                    id: wheelHandler
 
-                    onWheel: function(wheel) {
-                        if (wheel.angleDelta.y > 0) {
-                            scrollbar.decrease()
-                        } else {
-                            scrollbar.increase()
-                        }
-                    }
+                    target: view
+                    verticalStepSize: window.scrollStepSize
+                }
+
+                TapHandler {
+                    onDoubleTapped: toggleFullScreen()
                 }
 
                 Shortcut {
@@ -237,7 +241,6 @@ Window {
                 }
 
             } // ListView
-        }
     }
 
     FileDialog {

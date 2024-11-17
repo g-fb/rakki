@@ -41,6 +41,10 @@ set_package_properties(Qt6Core PROPERTIES TYPE REQUIRED)
 find_package(Qt6QuickControls2)
 set_package_properties(Qt6QuickControls2 PROPERTIES TYPE REQUIRED)
 
+find_package(KF6Kirigami)
+set_package_properties(KF6Kirigami PROPERTIES
+    TYPE REQUIRED URL "https://api.kde.org/frameworks/karchive/html/index.html")
+
 find_package(KF6Archive)
 set_package_properties(KF6Archive PROPERTIES
     TYPE REQUIRED URL "https://api.kde.org/frameworks/karchive/html/index.html")
