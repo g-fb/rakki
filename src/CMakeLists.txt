@@ -13,6 +13,7 @@ target_sources(rakki
         mangaimagesmodel.h mangaimagesmodel.cpp
         mangaimageprovider.h mangaimageprovider.cpp
         mangaloader.h mangaloader.cpp
+        backend.h backend.cpp
 )
 
 qt_policy(SET QTP0001 NEW)

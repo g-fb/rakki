@@ -18,6 +18,8 @@ Window {
     id: window
 
     property string file: ctxFile
+    property string fileDialogLocation: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
+    property string folderDialogLocation: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
     property int preFullScreenVisibility
     property int maximumImageWidth: 2000
     property int imageSpacing: 25
@@ -44,6 +46,8 @@ Window {
         property alias upscaleImages: window.upscaleImages
         property alias scrollStepSize: window.scrollStepSize
         property alias showScrollBar: window.showScrollBar
+        property alias fileDialogLocation: window.fileDialogLocation
+        property alias folderDialogLocation: window.folderDialogLocation
     }
 
     Item {
@@ -246,18 +250,20 @@ Window {
     FileDialog {
         id: fileDialog
 
-        currentFolder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
-        onSelectedFileChanged: {
+        currentFolder: settings.fileDialogLocation
+        onAccepted: {
             window.file = selectedFile
+            settings.fileDialogLocation = Backend.parentFolder(selectedFile)
         }
     }
 
     FolderDialog {
         id: folderDialog
 
-        currentFolder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
-        onSelectedFolderChanged: {
+        currentFolder: settings.folderDialogLocation
+        onAccepted: {
             window.file = selectedFolder
+            settings.folderDialogLocation = Backend.parentFolder(selectedFolder)
         }
     }
 
