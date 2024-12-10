@@ -105,7 +105,6 @@ void Extractor::extractRarArchive()
 
     connect(process, &QProcess::started, this, &Extractor::started);
     connect(process, &QProcess::finished, this, [this, &process]() {
-        process->deleteLater();
         Q_EMIT finished();
     });
 
